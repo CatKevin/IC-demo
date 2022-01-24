@@ -1,8 +1,5 @@
 export const idlFactory = ({ IDL }) => {
-  const Follower = IDL.Record({
-    'id' : IDL.Text,
-    'author' : IDL.Opt(IDL.Text),
-  });
+  const Follow = IDL.Record({ 'id' : IDL.Text, 'author' : IDL.Opt(IDL.Text) });
   const Time = IDL.Int;
   const Message = IDL.Record({
     'time' : Time,
@@ -11,7 +8,7 @@ export const idlFactory = ({ IDL }) => {
   });
   return IDL.Service({
     'follow' : IDL.Func([IDL.Principal], [], []),
-    'follows' : IDL.Func([], [IDL.Vec(Follower)], ['query']),
+    'follows' : IDL.Func([], [IDL.Vec(Follow)], ['query']),
     'get_name' : IDL.Func([], [IDL.Opt(IDL.Text)], ['query']),
     'get_passwd' : IDL.Func([], [IDL.Text], ['query']),
     'post' : IDL.Func([IDL.Text, IDL.Text], [], []),

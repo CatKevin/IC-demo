@@ -1,5 +1,5 @@
 import type { Principal } from '@dfinity/principal';
-export interface Follower { 'id' : string, 'author' : [] | [string] }
+export interface Follow { 'id' : string, 'author' : [] | [string] }
 export interface Message {
   'time' : Time,
   'author' : [] | [string],
@@ -8,7 +8,7 @@ export interface Message {
 export type Time = bigint;
 export interface _SERVICE {
   'follow' : (arg_0: Principal) => Promise<undefined>,
-  'follows' : () => Promise<Array<Follower>>,
+  'follows' : () => Promise<Array<Follow>>,
   'get_name' : () => Promise<[] | [string]>,
   'get_passwd' : () => Promise<string>,
   'post' : (arg_0: string, arg_1: string) => Promise<undefined>,

@@ -12,18 +12,18 @@ actor {
         author: ?Text;
     };
 
-    public type Follower = {
+    public type Follow = {
         id: Text;
         author: ?Text;
     };
 
     public type Microblog = actor {
-        follow: shared(Principal) -> async ();
-        follows: shared query () -> async [Follower];
-        post: shared(Text) -> async ();
-        posts: shared query (Time.Time) -> async [Message];
-        timeline: shared (Time.Time) -> async [Message];
-        set_name: shared(?Text) -> async ();
+        follow: shared(id:Principal, pass: Text) -> async();
+        follows: shared query () -> async [Follow];
+        post: shared (text: Text, pass: Text) -> async ();
+        posts: shared query (since: Time.Time) -> async [Message];
+        timeline: shared (pid: Text,since: Time.Time) -> async [Message];
+        set_name: shared (name: Text) -> async();
         get_name: shared query () -> async ?Text;
     };
 
@@ -46,7 +46,7 @@ actor {
         password;
     };
 
-    stable var followed : List.List<Follower> = List.nil();
+    var followed : List.List<Follow> = List.nil();
 
     public shared func follow(id: Principal) : async () {
         let canister : Microblog = actor(Principal.toText(id));
@@ -58,7 +58,7 @@ actor {
         followed := List.push(follower,followed);
     };
 
-    public shared query func follows() : async [Follower] {
+    public shared query func follows() : async [Follow] {
         List.toArray(followed)
     };
 

@@ -5,14 +5,14 @@ type Message =
    message: text;
    time: Time;
  };
-type Follower = 
+type Follow = 
  record {
    author: opt text;
    id: text;
  };
 service : {
   follow: (principal) -> ();
-  follows: () -> (vec Follower) query;
+  follows: () -> (vec Follow) query;
   get_name: () -> (opt text) query;
   get_passwd: () -> (text) query;
   post: (text, text) -> ();

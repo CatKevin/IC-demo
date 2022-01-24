@@ -52,16 +52,9 @@ async function load_posts() {
   let post_session = document.getElementById("myPosts");
   try {
     let posts = await hello.posts(0);
-    // console.log(posts)
     if (num_posts == posts.length) return;
     post_session.replaceChildren([]);
     num_posts = posts.length;
-    // for(var i=0; i < posts.length; i++) {
-    //   let post = document.createElement("p");
-    //   post.innerText = posts[i].message;
-    //   post_session.appendChild(post);
-    // }
-
     let tr = ""
     for(let i=0;i<posts.length;i++){
       tr = tr + `<tr>
